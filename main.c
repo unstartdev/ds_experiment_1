@@ -81,9 +81,13 @@ int main()
                 struct series *scur = tcur->samples;
                 while (*pline) {
                         for (size_t i = 0; i < 1024; i++) {
-                                if (*pline == ' ' || *pline == '\n' || *pline == 0) {
+                                if (*pline == ' ' || *pline == '\n') {
                                         nbuffer[i] = 0;
                                         pline++;
+                                        break;
+                                }
+                                if (*pline == 0) {
+                                        nbuffer[i] = 0;
                                         break;
                                 }
                                 nbuffer[i] = *pline++;
@@ -114,12 +118,12 @@ int main()
                         print_series(tcur->samples);
                 }
 
-                printf("Sample %zu: exit\n", i + 1);
+                printf("Sample %zu: exit\n", i);
 
                 int sel;
                 printf("Please select a sample: ");
                 scanf_s("%d", &sel);
-                if (sel == i + 1)
+                if (sel == i)
                         break;
 
 
@@ -147,8 +151,10 @@ int main()
 
                         printf("0. Delete\n1. Insert\n2. Locate\n3. Order\n4. Merge\n5. Traversal(printf)\n6. Back to main menu\nPlease select a test function: ");
                         scanf_s("%d", &sel);
-                        if (sel == 6)
+                        if (sel == 6) {
+                                OrderedListDestory(&testobj);
                                 break;
+                        }
                         int pos;
                         int val;
                         switch (sel) {
@@ -203,6 +209,7 @@ int main()
                                         printf("Merge failed.");
                                 printf("Merged result is ");
                                 OrderedListTraversal(&mg, printf_it);
+                                OrderedListDestory(&testobj2);
                                 break;
                         case 5:
                                 if (OrderedListTraversal(&testobj, printf_it) != OK)

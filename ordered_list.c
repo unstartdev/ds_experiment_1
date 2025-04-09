@@ -16,7 +16,7 @@ This version is for datastructure class.
 #include <stdio.h>
 #include "ordered_list.h"
 
-#define LIST_INIT_SIZE 100
+#define LIST_INIT_SIZE 10
 #define LISTINC 10
 
 Status int_equal(int a, int b)
@@ -213,4 +213,9 @@ Status OrderedListMerge(struct ordered_list *a, struct ordered_list *b, struct o
                 *t++ = *pb++;
         }
         return OK;
+}
+
+void OrderedListDestory(struct ordered_list *l)
+{
+        free(l->elem);
 }

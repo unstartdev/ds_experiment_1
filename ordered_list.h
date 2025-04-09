@@ -34,3 +34,5 @@ Status OrderedListTraversal(struct ordered_list *l, Status(*it)(ElemType));
 Status OrderedListOrder(struct ordered_list *l, char (*compare)(ElemType, ElemType));
 
 Status OrderedListMerge(struct ordered_list *a, struct ordered_list *b, struct ordered_list *out, char (*compare)(ElemType, ElemType));
+
+void OrderedListDestory(struct ordered_list *l);
